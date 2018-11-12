@@ -151,7 +151,7 @@ impl<'a> RecursivePageTable<'a> {
         assert_ne!(p2_index, self.recursive_index + 1, "can not edit recursive index");
         assert!(flags.contains(F::VALID), "try to edit a nonexistent p1 table");
         assert!(!flags.contains(F::READABLE) && !flags.contains(F::WRITABLE), "try to edit a 4M page as p1 table");
-        flags.insert(F::READABLE | F::WRITABLE);
+        flags.insert(F::READABLE | F::WRITABLE | F::ACCESSED | F::DIRTY);
         let p1 = Page::from_page_table_indices(self.recursive_index, p2_index);
         let p1 = unsafe{ &mut *(p1.start_address().as_usize() as *mut PageTable) };
         let ret = f(p1);
