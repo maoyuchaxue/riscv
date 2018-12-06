@@ -63,6 +63,21 @@ impl Sstatus {
     }
 
     #[inline(always)]
+    pub fn xie(&self) -> bool {
+        self.sie()
+    }
+
+    #[inline(always)]
+    pub fn set_xpie(&mut self, val: bool) {
+        self.set_spie(val);
+    }
+
+    #[inline(always)]
+    pub fn set_xie(&mut self, val: bool) {
+        self.set_sie(val);
+    }
+
+    #[inline(always)]
     pub fn set_spie(&mut self, val: bool) {
         self.bits.set_bit(5, val);
     }
@@ -86,10 +101,12 @@ clear!(0x100);
 set_clear_csr!(set_uie, clear_uie, 1 << 0);
 /// Supervisor Interrupt Enable
 set_clear_csr!(set_sie, clear_sie, 1 << 1);
+set_clear_csr!(set_xie, clear_xie, 1 << 1);
 /// User Previous Interrupt Enable
 set_csr!(set_upie, 1 << 4);
 /// Supervisor Previous Interrupt Enable
 set_csr!(set_spie, 1 << 5);
+set_csr!(set_xpie, 1 << 5);
 /// Make eXecutable Readable
 set_clear_csr!(set_mxr, clear_mxr, 1 << 19);
 /// Permit Supervisor User Memory access

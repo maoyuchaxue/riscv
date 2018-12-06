@@ -25,6 +25,7 @@ pub mod misa;
 pub mod mstatus;
 pub mod mtvec;
 pub mod mvendorid;
+pub mod mscratch;
 
 pub mod sstatus;
 pub mod stvec;
